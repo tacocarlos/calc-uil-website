@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Number Crunchers Practice: Calculator Keypad Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Number Crunchers Practice</h1>
+      <span class="subtitle">Calculator keypad demo</span>
+    </div>
+    <div class="connection">
+      <span id="conn-status" class="pill" data-state="disconnected">No calculator</span>
+      <button id="install-btn" class="btn">Install KEYPAD on calculator</button>
+      <button id="connect-btn" class="btn primary">Connect calculator</button>
+    </div>
+  </header>
+
+  <div id="serial-unsupported" class="banner" hidden>
+    This browser can’t talk to USB calculators. Use <strong>Chrome</strong> or <strong>Edge</strong> on a computer or Chromebook.
+    You can still use the on-screen keypad or your keyboard below.
+  </div>
+  <div id="install-status" class="banner" hidden></div>
+  <div id="no-handshake" class="banner warn" hidden>
+    The port opened but the calculator didn’t answer. Make sure the <strong>KEYPAD</strong> program is running on the calculator, then click Connect again.
+  </div>
+
+  <main class="layout">
+    <section class="left">
+      <div class="card problem-card">
+        <div class="card-head">
+          <h2>Problem <span id="problem-number">1</span></h2>
+          <div class="stats">
+            <span>Solved: <strong id="solved-count">0</strong></span>
+            <span>Time: <strong id="timer">0.0s</strong></span>
+          </div>
+        </div>
+        <div id="problem" class="problem"></div>
+        <div id="feedback" class="feedback">Key the expression in on your calculator and press <kbd>enter</kbd>. Write your answer as X.YZ × 10<sup>k</sup>.</div>
+        <div class="problem-actions">
+          <button id="skip-btn" class="btn">Skip</button>
+          <button id="next-btn" class="btn primary" hidden>Next problem ▸</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="lcd" id="lcd">
+          <div class="lcd-status">
+            <span id="lcd-mod" class="lcd-mod"></span>
+            <span>NORMAL FLOAT AUTO REAL <span id="lcd-mode">RADIAN</span> MP</span>
+          </div>
+          <div class="lcd-body" id="lcd-body"></div>
+        </div>
+      </div>
+
+      <div class="card log-card">
+        <div class="card-head">
+          <h2>Key events</h2>
+          <label class="toggle"><input type="checkbox" id="raw-toggle"> Show raw USB lines</label>
+        </div>
+        <ol id="log" class="log"></ol>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="calc" id="calc">
+        <div class="calc-brand">TI-84 Plus CE</div>
+        <div class="keypad" id="keypad"></div>
+      </div>
+      <details class="help">
+        <summary>No calculator? Use your keyboard</summary>
+        <p>Digits, <kbd>+ − * / ^ ( ) . ,</kbd>, <kbd>Enter</kbd>, <kbd>Backspace</kbd> = del, <kbd>Esc</kbd> = clear, arrows.</p>
+        <p><kbd>s</kbd> sin, <kbd>c</kbd> cos, <kbd>t</kbd> tan, <kbd>l</kbd> ln, <kbd>g</kbd> log, <kbd>q</kbd> x², <kbd>i</kbd> x⁻¹,
+          <kbd>n</kbd> (−), <kbd>r</kbd> √, <kbd>p</kbd> π, <kbd>e</kbd> e, <kbd>E</kbd> EE, <kbd>a</kbd> Ans, <kbd>m</kbd> rad/deg, <kbd>f</kbd> n/d fraction, <kbd>`</kbd> 2nd.</p>
+      </details>
+      <details class="help">
+        <summary>How to connect a TI-84 Plus CE</summary>
+        <ol>
+          <li>With the calculator on the home screen and plugged in, click <strong>Install KEYPAD on calculator</strong>. You only need to do this once.</li>
+          <li>Run <code>prgmKEYPAD</code> from the home screen.</li>
+          <li>Plug the calculator into this computer and click <strong>Connect calculator</strong>.</li>
+          <li>Press <kbd>on</kbd> on the calculator to stop keypad mode.</li>
+        </ol>
+      </details>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

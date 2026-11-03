@@ -1,0 +1,14 @@
+{
+  "name": "calc-uil-website",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev -w web",
+    "build": "npm run build --workspaces",
+    "test": "npm test -w @calc-uil/keypad",
+    "start": "./start.sh"
+  }
+}

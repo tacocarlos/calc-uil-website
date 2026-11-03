@@ -1,0 +1,5 @@
+node_modules/
+dist/
+calc/*/bin/
+calc/*/obj/
+.DS_Store

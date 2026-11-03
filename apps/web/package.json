@@ -1,0 +1,31 @@
+{
+  "name": "web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "predev": "npm run build -w @calc-uil/keypad && node scripts/copy-public-assets.mjs",
+    "dev": "next dev",
+    "prebuild": "npm run build -w @calc-uil/keypad && node scripts/copy-public-assets.mjs",
+    "build": "next build",
+    "start": "next start",
+    "lint": "biome check",
+    "format": "biome format --write"
+  },
+  "dependencies": {
+    "@calc-uil/keypad": "*",
+    "mathlive": "0.111.4",
+    "next": "16.4.4",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "xp.css": "0.2.6"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.6.4",
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

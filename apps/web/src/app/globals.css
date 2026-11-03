@@ -1,0 +1,270 @@
+@import "tailwindcss";
+
+/*
+ * Windows XP look. Widgets (windows, buttons, fieldsets, status bars) come from
+ * XP.css, imported in layout.tsx. XP.css is unlayered, so it wins over
+ * Tailwind's preflight; Tailwind utilities are only used for layout.
+ */
+
+:root {
+  --xp-blue: #0a246a;
+  --taskbar-height: 30px;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+}
+
+/* ---------- Desktop ---------- */
+
+.xp-desktop {
+  position: fixed;
+  inset: 0 0 var(--taskbar-height) 0;
+  overflow: auto;
+  background:
+    radial-gradient(
+      ellipse 120% 45% at 30% 100%,
+      #5fa83a 0%,
+      #3f8f2a 55%,
+      transparent 56%
+    ),
+    radial-gradient(
+      ellipse 90% 35% at 85% 100%,
+      #6db542 0%,
+      #4c9a30 60%,
+      transparent 61%
+    ),
+    linear-gradient(#2d6fd6 0%, #5b9cf0 45%, #a9cdf7 75%, #d7e9fb 100%);
+}
+
+/* ---------- Taskbar ---------- */
+
+.xp-taskbar {
+  position: fixed;
+  inset: auto 0 0 0;
+  height: var(--taskbar-height);
+  display: flex;
+  align-items: stretch;
+  gap: 4px;
+  z-index: 50;
+  background: linear-gradient(
+    #1f5ad8 0%,
+    #3a81f3 8%,
+    #2765e0 40%,
+    #245edb 88%,
+    #1941a5 100%
+  );
+  font-family: Tahoma, "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 11px;
+}
+
+/* Taskbar buttons opt out of XP.css button styling. Scoped so they outrank its
+   most specific button rule, button:not(:disabled):hover. */
+.xp-taskbar .xp-start,
+.xp-taskbar .xp-start:is(:hover, :active, :focus) {
+  all: unset;
+  display: flex;
+  align-items: center;
+  padding: 0 22px 2px 12px;
+  border-radius: 0 12px 12px 0;
+  background: linear-gradient(
+    #3c9a3c 0%,
+    #5dc05d 12%,
+    #3a9a3a 50%,
+    #2f8a2f 90%,
+    #1f6b1f 100%
+  );
+  box-shadow: inset -2px 0 3px rgb(0 0 0 / 0.3);
+  color: #fff;
+  font:
+    italic bold 18px / 1 "Trebuchet MS",
+    Tahoma,
+    sans-serif;
+  text-shadow: 1px 1px 2px rgb(0 0 0 / 0.5);
+  cursor: pointer;
+}
+.xp-taskbar .xp-start:hover {
+  filter: brightness(1.1);
+}
+.xp-taskbar .xp-start[aria-expanded="true"] {
+  filter: brightness(0.9);
+}
+
+.xp-taskbar .xp-task,
+.xp-taskbar .xp-task:is(:hover, :active, :focus) {
+  all: unset;
+  display: flex;
+  align-items: center;
+  width: 160px;
+  margin: 3px 0;
+  padding: 0 8px;
+  border-radius: 3px;
+  background: linear-gradient(#3c8cf6, #2a70e8);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
+  color: #fff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.xp-taskbar .xp-task:hover {
+  filter: brightness(1.12);
+}
+.xp-taskbar .xp-task[aria-pressed="true"] {
+  background: linear-gradient(#1b4fb8, #1e5bd0);
+  box-shadow: inset 1px 1px 2px rgb(0 0 0 / 0.5);
+}
+
+.xp-tray {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 12px;
+  background: linear-gradient(#0f8bea, #16a0f3 15%, #0f8bea 90%, #0c6fc7);
+  border-left: 1px solid #0a4fa7;
+  box-shadow: inset 1px 0 0 #3bb4ff;
+  color: #fff;
+}
+
+.xp-tray-light {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #9aa4ad;
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.3);
+}
+.xp-tray-light[data-on="true"] {
+  background: #4ee04e;
+}
+
+/* ---------- Start menu ---------- */
+
+.xp-start-menu {
+  position: fixed;
+  left: 0;
+  bottom: var(--taskbar-height);
+  width: 260px;
+  z-index: 60;
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 2px -2px 8px rgb(0 0 0 / 0.4);
+  border: 1px solid #1941a5;
+  font-family: Tahoma, "Pixelated MS Sans Serif", Arial, sans-serif;
+  font-size: 11px;
+}
+.xp-start-menu header {
+  padding: 8px 10px;
+  background: linear-gradient(#1f5ad8, #3a81f3 40%, #245edb);
+  color: #fff;
+  font-weight: bold;
+  font-size: 13px;
+}
+.xp-start-menu a {
+  display: block;
+  padding: 6px 12px;
+  color: #000;
+  text-decoration: none;
+}
+.xp-start-menu a:hover {
+  background: #316ac5;
+  color: #fff;
+}
+
+/* ---------- Windows & dialogs ---------- */
+
+.xp-window-maximized {
+  position: fixed;
+  inset: 0 0 var(--taskbar-height) 0;
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+}
+.xp-window-maximized > .window-body {
+  flex: 1;
+  overflow: auto;
+}
+
+.xp-modal {
+  position: fixed;
+  inset: 0 0 var(--taskbar-height) 0;
+  z-index: 45;
+  display: grid;
+  place-items: center;
+  background: rgb(0 0 0 / 0.15);
+}
+
+.xp-message {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+.xp-message-icon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font:
+    bold 20px / 1 Tahoma,
+    sans-serif;
+  box-shadow: inset 0 -3px 4px rgb(0 0 0 / 0.25);
+}
+.xp-message-icon[data-kind="info"] {
+  background: radial-gradient(circle at 35% 30%, #7fb4ff, #1a5fd8);
+}
+.xp-message-icon[data-kind="warning"] {
+  background: radial-gradient(circle at 35% 30%, #ffe27a, #e0a800);
+  color: #000;
+}
+.xp-message-icon[data-kind="error"] {
+  background: radial-gradient(circle at 35% 30%, #ff8a7a, #c8200f);
+}
+
+/* ---------- TI-84 keypad keys: opt out of XP.css button styling ---------- */
+
+.ti-keypad .ti-key,
+.ti-keypad .ti-key:is(:hover, :active, :focus) {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.ti-keypad .ti-key:focus-visible {
+  outline: 1px dotted #fff;
+}
+
+/* ---------- Read-only MathLive fields (components/math-display.tsx) ---------- */
+
+math-field.math-display {
+  border: none;
+  background: transparent;
+  color: inherit;
+  padding: 0;
+}
+math-field.math-display::part(menu-toggle),
+math-field.math-display::part(virtual-keyboard-toggle) {
+  display: none;
+}
+
+/* Pop-in for the correct-answer checkmark (practice-session.tsx). */
+@keyframes xp-pop {
+  from {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
